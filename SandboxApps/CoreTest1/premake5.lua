@@ -38,7 +38,7 @@ project "CoreTest1"
 
       links
       {
-         "ArbitronicRenderer3D"
+         "_ArbitronicRenderer3D"
       }
 
       buildoptions

@@ -9,7 +9,7 @@ Engine/3rdPartyLibs/imgui/*
 
 #Sandbox Apps
 #--CoreTest1
-Sandbox/CoreTest1/objs_int/
+SandboxApps/CoreTest1/objs_int/
 
 #GLFW
 !Engine/3rdPartyLibs/GLFW/
