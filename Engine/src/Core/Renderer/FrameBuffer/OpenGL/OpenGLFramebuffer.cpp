@@ -4,7 +4,7 @@
 namespace ARB {
 	void OpenGLFramebuffer::GenerateFrameBuffer() {
 		if (IsFrameBufferIDValid()) {
-			std::cout << "Framebuffer " << m_name << " object has already been created!!" << std::endl;
+			ARB_TRACE("Framebuffer {0}, object has already created", m_name);
 			return;
 		}
 
@@ -14,7 +14,7 @@ namespace ARB {
 	}
 	void OpenGLFramebuffer::GenerateColorBufferTexture() {
 		if (IsColorBufferIDValid()) {
-			std::cout << "Color Buffer presets of Framebuffer " << m_name << " has already been set!!" << std::endl;
+			ARB_TRACE("Color Buffer presets of Framebuffer {0} has already been set", m_name);
 			return;
 		}
 
@@ -30,7 +30,7 @@ namespace ARB {
 	}
 	void OpenGLFramebuffer::GenerateColorBufferRenderBuffer() {
 		if (IsColorBufferIDValid()) {
-			std::cout << "Color Buffer presets of Framebuffer " << m_name << " has already been set!!" << std::endl;
+			ARB_TRACE("Color Buffer presets of Framebuffer {0} has already been set", m_name);
 			return;
 		}
 
@@ -54,19 +54,21 @@ namespace ARB {
 	}
 	void OpenGLFramebuffer::GenerateDepthStencilBufferRenderBuffer() {
 		if (IsDepthStencilBufferIDValid()) {
-			std::cout << "Depth_Stencil Buffer presets of Framebuffer " << m_name << " has already been set!!" << std::endl;
+			ARB_TRACE("Depth_Stencil Buffer presets of Framebuffer {0} has already been set");
 		}
 
 		glGenRenderbuffers(1, &depthStencilBufferID.ID);
 		glBindRenderbuffer(GL_RENDERBUFFER, depthStencilBufferID.ID);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_scrWidth, m_scrHeight);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-		depthStencilBufferID.isValid = true;
 		depthStencilBufferID.type = BufferType::OPENGL_DEPTH_STENCIL_RENDERBUFFER;
+		depthStencilBufferID.isValid = true;
 	}
 	void OpenGLFramebuffer::AttachColorBufferTexture() {
-		if (IsColorBufferIDAttached())
+		if (colorBufferID.isAttachedToFB) {
+			ARB_TRACE("A Color Buffer is already bound");
 			return;
+		}
 
 		//Attaching the color buffer
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBufferID.ID, 0);
@@ -91,27 +93,35 @@ namespace ARB {
 		//To be implemented
 	}
 	void OpenGLFramebuffer::AttachDepthStencilBufferRenderBuffer() {
-		if (IsDepthStencilBufferIDAttached())
+		if (depthStencilBufferID.isAttachedToFB){
+			ARB_TRACE("A Depth_Stencil Buffer is already bound");
 			return;
+		}
 
 		//Attaching the Depth Stencil buffer
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, depthStencilBufferID.ID);
 		depthStencilBufferID.isAttachedToFB = true;
+		ARB_TRACE("Depth_Stencil buffer as a RenderBuffer is bound");
 	}
 	void OpenGLFramebuffer::BindFrameBuffer() {
 		glBindFramebuffer(GL_FRAMEBUFFER, fbID.ID);
+		ARB_TRACE("Framebuffer with ID {0} is now bound", fbID.ID);
 	}
 	void OpenGLFramebuffer::UnbindFrameBuffer() {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		ARB_TRACE("Framebuffer at Index 0 is now bound");
 	}
 	void OpenGLFramebuffer::BindColorTexture() {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, colorBufferID.ID);
+		ARB_TRACE("Color Buffer as a Texture is bound");
 	}
 	void OpenGLFramebuffer::CheckStatus() {
 		BindFrameBuffer();
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-			std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+			ARB_ERROR("Framebuffer is NOT Complete!");
+		else
+			ARB_INFO("Framebuffer is Complete!");
 		UnbindFrameBuffer();
 	}
 }

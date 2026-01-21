@@ -14,6 +14,8 @@ namespace ARB {
 		};
 	public:
 		RendererType renderType;
+		void Init();
+		void Render();
 	};
 }
 
