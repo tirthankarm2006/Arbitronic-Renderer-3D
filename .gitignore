@@ -9,7 +9,7 @@ _Renderer/binaries/objs_int/
 
 #Sandbox Apps
 #--CoreTest1
-SandboxApps/CoreTest1/objs_int/
+SandboxApps/CoreTest1/objs-int/
 
 #GLFW
 !3rdPartyLibs/GLFW/

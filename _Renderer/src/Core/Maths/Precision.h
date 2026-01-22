@@ -5,8 +5,9 @@
 #include "math.h"
 
 namespace ARB {
-	//typedef float realf_t;
-	typedef double realf_t;
+	typedef float realf_32t;
+	typedef double realf_64t;
+
     #define SQRT(x) sqrt(x);
 }
 

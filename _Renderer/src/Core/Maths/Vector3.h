@@ -5,13 +5,14 @@
 #include "Precision.h"
 
 namespace ARB {
+	template<typename T>
 	class Vector3
 	{
 	public:
-		realf_t x, y, z;
+		T x, y, z;
 		Vector3() 
 			: x(0), y(0), z(0){}
-		Vector3(const realf_t x, const realf_t y, const realf_t z)
+		Vector3(const T x, const T y, const T z)
 			: x(x), y(y), z(z) {}
 
 		//Basic Vector3 addition and substraction Operations
@@ -34,25 +35,25 @@ namespace ARB {
 		}
 
 		//Vector scaled by a floating point value s
-		void operator*=(const realf_t s) {
+		void operator*=(const T s) {
 			x *= s;
 			y *= s;
 			z *= s;
 		}
-		Vector3 operator*(const realf_t s) const {
+		Vector3 operator*(const T s) const {
 			return Vector3(x * s, y * s, z * s);
 		}
-		void AddScaledVector(const Vector3& v, const realf_t s) {
+		void AddScaledVector(const Vector3& v, const T s) {
 			x += v.x * s;
 			y += v.y * s;
 			z += v.z * s;
 		}
 
 		//Vector3 Scalar Dot Product
-		realf_t DotProduct(const Vector3& v) const {
+		T DotProduct(const Vector3& v) const {
 			return x * v.x + y * v.y + z * v.z;
 		}
-		realf_t operator*(const Vector3& v) const {
+		T operator*(const Vector3& v) const {
 			return x * v.x + y * v.y + z * v.z;
 		}
 
@@ -68,26 +69,26 @@ namespace ARB {
 		}
 
 		//Vector3 magnitude
-		realf_t GetMagnitude() const {
+		T GetMagnitude() const {
 			return SQRT(x * x + y * y + z * z);
 		}
-		realf_t GetMagnitudeSquared() const{
+		T GetMagnitudeSquared() const{
 			return x * x + y * y + z * z;
 		}
 
 		//Vector3 operations with the magnitude
 		void Normalize() {
-			realf_t s = GetMagnitude();
+			T s = GetMagnitude();
 			if (s > 0)
-				*this *= ((realf_t)1 / s);
+				*this *= ((T)1 / s);
 		}
-		void ChangeMagnitude(const realf_t s) {
+		void ChangeMagnitude(const T s) {
 			Normalize();
 			x *= s;
 			y *= s;
 			z *= s;
 		}
-		void Trim(const realf_t s) {
+		void Trim(const T s) {
 			if (GetMagnitudeSquared() > s * s) {
 			    Normalize();
 				x *= s;
