@@ -1,0 +1,10 @@
+﻿  UIBackend.cpp
+  UIWindowTab.cpp
+  glfw_window.cpp
+  ARB_Terminal_Log.cpp
+D:\Programming\VS2019_ARBITRONIC\Arbitronic-Renderer-3D\Utility\src\Logging\ARB_Terminal_Log.h(41,43): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Log.cpp
+  SandboxApp.cpp
+  Generating Code...
+fmtd.lib(fmtd.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in opengl32.lib(OPENGL32.dll); second definition ignored
+  Utility.vcxproj -> D:\Programming\VS2019_ARBITRONIC\Arbitronic-Renderer-3D\Utility\binaries\Main\Utility.lib

@@ -1,5 +1,6 @@
 #include "Arbitronic.h"
-#include "SandboxApp.h"
+#include "Sandbox/SandboxApp.h"
+#include "Logging/Sandbox_Log.h"
 
 #ifdef SANDBOX_DEBUG
 int main(int argc, char** argv) {

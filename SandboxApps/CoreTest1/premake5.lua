@@ -12,20 +12,21 @@ project "CoreTest1"
    }
 
    includedirs{
-      "$(SolutionDir)Sandbox",
-      "$(SolutionDir)Sandbox/src",
-      "$(SolutionDir)Engine/src",
-      "$(SolutionDir)Engine/3rdPartyLibs",
-      "$(SolutionDir)Engine/3rdPartyLibs/GLFW/include",
-      "$(SolutionDir)Engine/3rdPartyLibs/glad_OpenGL/include",
-      "$(SolutionDir)Engine/3rdPartyLibs/spdlog/include",
-      "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/main/",
-      "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/backend",
-      "$(SolutionDir)Engine/3rdPartyLibs/Glm",
-      "$(SolutionDir)Engine/3rdPartyLibs/Assimp/include",
-      "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/include",
-      "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/include/assimp"
+      "$(SolutionDir)/_Renderer/src",
+      "$(SolutionDir)/_Renderer/src/Core",
+      "$(SolutionDir)/Utility/src",
+      "$(SolutionDir)/3rdPartyLibs",
+      "$(SolutionDir)/3rdPartyLibs/GLFW/include",
+      "$(SolutionDir)/3rdPartyLibs/glad_OpenGL/include",
+      "$(SolutionDir)/3rdPartyLibs/spdlog/include",
+      "$(SolutionDir)/3rdPartyLibs/imgui/src/main/",
+      "$(SolutionDir)/3rdPartyLibs/imgui/src/backend",
+      "$(SolutionDir)/3rdPartyLibs/Glm",
+      "$(SolutionDir)/3rdPartyLibs/fmt/include"
    }
+   libdirs{
+        "$(SolutionDir)3rdPartyLibs/fmt/build/Debug"
+    }
 
 	filter "system:windows"
 		systemversion "latest"
@@ -38,7 +39,14 @@ project "CoreTest1"
 
       links
       {
-         "_ArbitronicRenderer3D"
+        "_ArbitronicRenderer3D",
+        "GLFW", --linking the project with name "GLFW",
+        "GLAD",
+        "opengl32.lib",
+        "spdlog",
+        "imgui",
+        "fmtd.lib",
+        "Utility"
       }
 
       buildoptions
